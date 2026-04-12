@@ -1,7 +1,10 @@
 import serial
 import time
+import os  # <-- Add this import
 
-PORT = "COM8"   # change this to "/dev/ttyUSB0" in RPi
+# --- Update this section ---
+# Use the PORT environment variable if set, otherwise default to "COM8"
+PORT = os.environ.get("SERIAL_PORT", "COM8")
 BAUD = 9600
 PARITY = serial.PARITY_EVEN
 STOPBITS = serial.STOPBITS_ONE
