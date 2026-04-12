@@ -1,0 +1,19 @@
+services:
+  # This is your Python app
+  rs485-sender:
+    image: saurabhleo45/rs485-app:latest  # Replace with your Docker Hub name
+    container_name: rs485-app
+    restart: always
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+    environment:
+      - SERIAL_PORT=/dev/ttyUSB0
+
+  # This handles the auto-updates
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 60 --cleanup
